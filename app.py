@@ -7,8 +7,8 @@ app = Flask(__name__)
 
 # Load environment variables
 load_dotenv()
-app.config['MONGO_URI'] = os.getenv('MONGO_URI')
-app.secret_key = os.getenv('SECRET_KEY')
+app.config['MONGO_URI'] = os.environ.get('MONGO_URI')
+app.secret_key = os.environ.get('SECRET_KEY')
 
 # Initialize MongoDB client
 client = MongoClient(app.config['MONGO_URI'])
