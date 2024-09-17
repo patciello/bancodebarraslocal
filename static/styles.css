@@ -45,7 +45,7 @@ nav ul li a {
 
 .search-bar input[type="text"] {
   width: 100%;
-  padding: 10px 50px 10px 20px; /* Ajusta o padding para o ícone */
+  padding: 10px 10px 10px 20px; /* Ajusta o padding para o ícone */
   border-radius: 25px;
   border: 1px solid #444;
   background-color: #1e1e1e;
