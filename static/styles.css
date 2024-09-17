@@ -1,76 +1,98 @@
 body {
-    background-color: #121212;
-    color: #FFFFFF;
-    font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  text-align: center; /* Centraliza o texto */
 }
 
 nav {
-    background-color: #1E1E1E;
-    padding: 10px;
+  background-color: #1e1e1e;
+  padding: 10px;
 }
 
 nav ul {
-    list-style: none;
-    display: flex;
-    gap: 15px;
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  justify-content: center; /* Centraliza o menu */
 }
 
 nav ul li a {
-    color: #FFFFFF;
-    text-decoration: none;
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .container {
-    margin: 20px;
+  margin: 20px auto; /* Centraliza o container */
+  max-width: 800px; /* Define uma largura máxima */
 }
 
-input[type="text"] {
-    width: 100%;
-    max-width: 400px;
-    padding: 10px;
-    border-radius: 25px;
-    border: 1px solid #444;
-    background-color: #1E1E1E;
-    color: #FFFFFF;
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza o conteúdo */
 }
 
-button {
-    padding: 10px 20px;
-    border-radius: 25px;
-    border: none;
-    background-color: #6200EE;
-    color: #FFFFFF;
-    cursor: pointer;
+.search-form {
+  width: 100%;
+  max-width: 400px;
 }
 
-button:hover {
-    background-color: #3700B3;
+.search-bar {
+  position: relative;
+  width: 100%;
+}
+
+.search-bar input[type="text"] {
+  width: 100%;
+  padding: 10px 50px 10px 20px; /* Ajusta o padding para o ícone */
+  border-radius: 25px;
+  border: 1px solid #444;
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+.search-button {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.search-button img {
+  width: 20px;
+  height: 20px;
 }
 
 table {
-    width: 100%;
-    margin-top: 20px;
-    border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
 }
 
-th, td {
-    border: 1px solid #444;
-    padding: 10px;
-    text-align: left;
+th,
+td {
+  border: 1px solid #444;
+  padding: 10px;
+  text-align: center; /* Centraliza o texto nas células */
 }
 
 .alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
 }
 
 .alert.success {
-    background-color: #4CAF50;
-    color: white;
+  background-color: #4caf50;
+  color: white;
 }
 
 .alert.warning {
-    background-color: #FF9800;
-    color: white;
+  background-color: #ff9800;
+  color: white;
 }
