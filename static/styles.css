@@ -54,9 +54,8 @@ nav ul li a {
 
 .search-button {
   position: absolute;
-  right: 15px;
+  right: 5px;
   top: 50%;
-  transform: translateY(-50%);
   background: none;
   border: none;
   padding: 0;
