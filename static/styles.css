@@ -1,5 +1,5 @@
 body {
-  background-image: url("{{ url_for('static', filename='images/background_barcode.webp') }}");
+  background-image: url("{{ url_for('static', filename='images/background_barcode.jpg') }}");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
