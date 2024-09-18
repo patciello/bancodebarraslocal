@@ -1,13 +1,14 @@
 body {
-  background-image: url("{{ url_for('static', filename='images/background_barcode.jpg') }}");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
+    background-image: url("{{ url_for('static', filename='images/background_barcode.jpg') }}"); /* Substitua pelo caminho correto */
+    background-size: cover; /* Garante que o fundo cubra a página */
+    background-repeat: no-repeat; /* Evita repetição do fundo */
+    background-attachment: fixed; /* Faz o fundo ficar fixo ao rolar */
+    background-position: center; /* Centraliza a imagem */
+    color: #FFFFFF; /* Para garantir que o texto seja legível sobre o fundo */
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    min-height: 100vh;
+    height: 100vh; /* Garante que o fundo cubra toda a altura da página */
 }
 
 nav {
