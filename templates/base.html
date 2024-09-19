@@ -16,7 +16,6 @@
         <li><a href="{{ url_for('history') }}">Histórico</a></li>
       </ul>
     </nav>
-    <div class="background-overlay"></div>
     <div class="container">
       {% with messages = get_flashed_messages(with_categories=true) %} {% if
       messages %} {% for category, message in messages %}
