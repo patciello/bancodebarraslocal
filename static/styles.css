@@ -57,7 +57,7 @@ nav ul li a {
 }
 
 .search-bar input[type="text"]:focus {
-  border: 2px solid #00008b; /* Borda azul escura quando focada */
+  border: 2px solid #5dd9ff; /* Borda azul escura quando focada */
   outline: none; /* Remove a borda de foco padrão do navegador */
 }
 
