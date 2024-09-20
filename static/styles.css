@@ -1,14 +1,13 @@
 body {
-  background-image: url('static/images/background_barcode.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    color: #FFFFFF;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  color: #1a1a1a;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
 
 nav {
@@ -53,9 +52,14 @@ nav ul li a {
   width: 100%;
   padding: 10px 10px 10px 20px; /* Ajusta o padding para o ícone */
   border-radius: 25px;
-  border: 1px solid #444;
+  border: 2px solid #444;
   background-color: #1e1e1e;
   color: #ffffff;
+}
+
+.search-bar input[type="text"]:focus {
+  border: 2px solid #00008b; /* Borda azul escura quando focada */
+  outline: none; /* Remove a borda de foco padrão do navegador */
 }
 
 .search-button {
