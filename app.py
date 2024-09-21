@@ -26,8 +26,8 @@ collection = db['barcodes']
 oauth = OAuth(app)
 oauth.register(
     name='google',
-    client_id=os.environ.get('GOOGLE_CLIENT_ID'),
-    client_secret=os.environ.get('GOOGLE_CLIENT_SECRET'),
+    client_id=os.environ.get('CLIENT_ID'),
+    client_secret=os.environ.get('CLIENT_SECRET'),
     access_token_url=os.environ.get('GOOGLE_TOKEN_URI'),
     authorize_url=os.environ.get('GOOGLE_AUTH_URI'),
     authorize_redirect_uri=os.environ.get('GOOGLE_REDIRECT_URI'),
