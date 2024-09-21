@@ -30,11 +30,11 @@ collection = db['barcodes']
 oauth = OAuth(app)
 oauth.register(
     name='google',
-    client_id=credentials['web']['client_id'],
-    client_secret=credentials['web']['client_secret'],
-    access_token_url=credentials['web']['token_uri'],
-    authorize_url=credentials['web']['auth_uri'],
-    authorize_redirect_uri=credentials['web']['redirect_uris'][0],  # Usando o primeiro redirect_uri da lista
+    client_id=credentials('CLIENT_ID'),
+    client_secret=credentials('CLIENT_SECRET'),
+    access_token_url=credentials('GOOGLE_TOKEN_URI'),
+    authorize_url=credentials('GOOGLE_AUTH_URI'),
+    authorize_redirect_uri=credentials('GOOGLE_REDIRECT_URI'),  # Usando o primeiro redirect_uri da lista
     api_base_url='https://www.googleapis.com/oauth2/v1/',
     client_kwargs={'scope': 'openid profile email'}
 )
