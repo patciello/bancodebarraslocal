@@ -3,6 +3,10 @@ from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
 
+#Google OAuth
+from authlib.integrations.flask_client import OAuth
+
+
 app = Flask(__name__)
 
 # Load environment variables
@@ -14,6 +18,51 @@ app.secret_key = os.environ.get('SECRET_KEY')
 client = MongoClient(app.config['MONGO_URI'])
 db = client['barcode_db']
 collection = db['barcodes']
+
+# Configuração do OAuth
+oauth = OAuth(app)
+oauth.register(
+    name='google',
+    client_id=os.environ.get('GOOGLE_CLIENT_ID'),
+    client_secret=os.environ.get('GOOGLE_CLIENT_SECRET'),
+    access_token_url='https://accounts.google.com/o/oauth2/token',
+    authorize_url='https://accounts.google.com/o/oauth2/auth',
+    authorize_params=None,
+    access_token_params=None,
+    authorize_redirect_uri='http://127.0.0.1:5000/auth',
+    api_base_url='https://www.googleapis.com/oauth2/v1/',
+    client_kwargs={'scope': 'openid profile email'}
+)
+
+
+
+@app.route('/')
+def index():
+    if 'google_token' in session:
+        user = oauth.google.get('userinfo').json()
+        return f"Você está logado como {user['email']}"
+    return redirect(url_for('login'))
+
+@app.route('/login')
+def login():
+    redirect_uri = url_for('auth', _external=True)
+    return oauth.google.authorize_redirect(redirect_uri)
+
+@app.route('/auth')
+def auth():
+    token = oauth.google.authorize_access_token()
+    session['google_token'] = token
+    user = oauth.google.get('userinfo').json()
+    session['user_info'] = user
+    return redirect('/')
+
+@app.route('/logout')
+def logout():
+    session.pop('google_token', None)
+    session.pop('user_info', None)
+    return redirect('/')
+
+
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
