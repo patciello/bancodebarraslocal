@@ -7,10 +7,6 @@ from dotenv import load_dotenv
 from authlib.integrations.flask_client import OAuth
 
 
-# Carregando as credenciais do arquivo JSON
-with open('config/credentials.json') as f:
-    credentials = json.load(f)
-
 
 
 app = Flask(__name__)
