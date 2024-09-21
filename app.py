@@ -29,7 +29,7 @@ oauth.register(
     authorize_url='https://accounts.google.com/o/oauth2/auth',
     authorize_params=None,
     access_token_params=None,
-    authorize_redirect_uri='http://127.0.0.1:5000/auth',
+    authorize_redirect_uri='https://bancodebarraslocal.onrender.com/',
     api_base_url='https://www.googleapis.com/oauth2/v1/',
     client_kwargs={'scope': 'openid profile email'}
 )
