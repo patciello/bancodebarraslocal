@@ -31,6 +31,7 @@ oauth.register(
     access_token_url=os.environ.get('GOOGLE_TOKEN_URI'),
     authorize_url=os.environ.get('GOOGLE_AUTH_URI'),
     authorize_redirect_uri=os.environ.get('GOOGLE_REDIRECT_URI'),
+    jwks_uri=('GOOGLE_CERT_URL'),
     api_base_url='https://www.googleapis.com/oauth2/v1/',
     client_kwargs={'scope': 'openid profile email'}
 )
