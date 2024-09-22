@@ -75,11 +75,15 @@ def login():
 # Rota de autenticação
 @app.route('/auth')
 def auth():
-    token = oauth.google.authorize_access_token()
-    session['google_token'] = token
-    user = oauth.google.get('userinfo').json()
-    session['user_info'] = user
-    return redirect(url_for('home'))
+    try:
+        token = oauth.google.authorize_access_token()
+        session['google_token'] = token
+        user = oauth.google.get('userinfo').json()
+        session['user_info'] = user
+        return redirect(url_for('home'))
+    except Exception as e:
+        print(f"Erro durante a autenticação: {e}")
+        return redirect(url_for('login'))
 
 # Rota de logout
 @app.route('/logout')
