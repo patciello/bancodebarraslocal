@@ -31,12 +31,13 @@ oauth.register(
     access_token_url=os.environ.get('GOOGLE_TOKEN_URI'),
     authorize_url=os.environ.get('GOOGLE_AUTH_URI'),
     authorize_redirect_uri=os.environ.get('GOOGLE_REDIRECT_URI'),
-     client_metadata={
+    client_kwargs={'scope': 'openid profile email'},
+    client_metadata={
         'issuer': 'https://accounts.google.com',
         'jwks_uri': os.environ.get('GOOGLE_CERT_URL')  # Usando a variável de ambiente corretamente
     }
-    client_kwargs={'scope': 'openid profile email'}
 )
+    
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
