@@ -77,10 +77,15 @@ def login():
 def auth():
     try:
         token = oauth.google.authorize_access_token()
-        session['google_token'] = token
-        user = oauth.google.get('userinfo').json()
-        session['user_info'] = user
-        return redirect(url_for('home'))
+        if token:
+            session['google_token'] = token
+            user = oauth.google.get('userinfo').json()
+            session['user_info'] = user
+            print(f"Autenticação bem-sucedida: {user}")
+            return redirect(url_for('home'))
+        else:
+            print("Falha ao obter o token do Google.")
+            return redirect(url_for('login'))
     except Exception as e:
         print(f"Erro durante a autenticação: {e}")
         return redirect(url_for('login'))
