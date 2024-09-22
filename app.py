@@ -34,7 +34,7 @@ oauth.register(
     client_kwargs={'scope': 'openid profile email'},
     client_metadata={
         'issuer': 'https://accounts.google.com',
-        'jwks_uri': os.environ.get('GOOGLE_CERT_URL')  # Usando a variável de ambiente corretamente
+        'jwks_uri': 'https://www.googleapis.com/oauth2/v3/certs'  # Usando a variável de ambiente corretamente
     }
 )
     
