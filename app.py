@@ -75,7 +75,6 @@ def login():
 # Rota de autenticação
 @app.route('/auth')
 def auth():
-    try:
         token = oauth.google.authorize_access_token()
         if token:
             session['google_token'] = token
@@ -86,9 +85,6 @@ def auth():
         else:
             print("Falha ao obter o token do Google.")
             return redirect(url_for('login'))
-    except Exception as e:
-        print(f"Erro durante a autenticação: {e}")
-        return redirect(url_for('login'))
 
 # Rota de logout
 @app.route('/logout')
