@@ -28,14 +28,8 @@ oauth.register(
     name='google',
     client_id=os.environ.get('CLIENT_ID'),
     client_secret=os.environ.get('CLIENT_SECRET'),
-    access_token_url=os.environ.get('GOOGLE_TOKEN_URI'),
-    authorize_url=os.environ.get('GOOGLE_AUTH_URI'),
-    authorize_redirect_uri=os.environ.get('GOOGLE_REDIRECT_URI'),
+    server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
     client_kwargs={'scope': 'openid profile email'},
-    client_metadata={
-        'issuer': 'https://accounts.google.com',
-        'jwks_uri': 'https://www.googleapis.com/oauth2/v3/certs'  # Usando a variável de ambiente corretamente
-    }
 )
     
 
@@ -78,7 +72,7 @@ def auth():
         token = oauth.google.authorize_access_token()
         if token:
             session['google_token'] = token
-            user = oauth.google.get('userinfo').json()
+            user = oauth.google.parse_id_token(token)
             session['user_info'] = user
             print(f"Autenticação bem-sucedida: {user}")
             return redirect(url_for('home'))
