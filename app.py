@@ -56,6 +56,7 @@ def home():
     
     # Recupera os últimos 10 códigos de barras
     recent_barcodes = collection.find().sort('_id', -1).limit(10)
+    recent_barcodes = [{'barcode': b['barcode'], 'timestamp': b['timestamp'], 'trecho': b.get('trecho')} for b in recent_barcodes]
     return render_template('home.html', barcodes=recent_barcodes)
 
 # Rota para visualizar o histórico de códigos de barras
@@ -65,6 +66,7 @@ def history():
         return redirect(url_for('login'))
     
     all_barcodes = collection.find().sort('_id', -1)
+    all_barcodes = [{'barcode': b['barcode'], 'timestamp': b['timestamp'], 'trecho': b.get('trecho')} for b in all_barcodes]
     return render_template('history.html', barcodes=all_barcodes)
 
 # Rota de login

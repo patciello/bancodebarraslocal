@@ -4,10 +4,14 @@
 <table>
     <tr>
         <th>Código de Barras</th>
+        <th>Data e Hora</th>
+        <th>Trecho</th>
     </tr>
     {% for barcode in barcodes %}
     <tr>
         <td>{{ barcode.barcode }}</td>
+        <td>{{ barcode.timestamp }}</td>
+        <td>{{ barcode.trecho }}</td>
     </tr>
     {% endfor %}
 </table>
