@@ -1,13 +1,11 @@
+from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
 
-#Google OAuth
+# Google OAuth
 from authlib.integrations.flask_client import OAuth
-
-
-
 
 app = Flask(__name__)
 
@@ -20,7 +18,6 @@ app.secret_key = os.environ.get('SECRET_KEY', 'CLIENT_SECRET')
 client = MongoClient(app.config['MONGO_URI'])
 db = client['barcode_db']
 collection = db['barcodes']
-
 
 # Configuração do OAuth usando as credenciais do JSON
 oauth = OAuth(app)
@@ -42,10 +39,18 @@ def home():
     
     if request.method == 'POST':
         barcode = request.form.get('barcode')
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        
+        if len(barcode) == 44:
+            trecho = barcode[26:34]
+            barcode_data = {'barcode': barcode, 'timestamp': timestamp, 'trecho': trecho}
+        else:
+            barcode_data = {'barcode': barcode, 'timestamp': timestamp}
+        
         if collection.find_one({'barcode': barcode}):
             flash('Código de barras já foi adicionado!', 'warning')
         else:
-            collection.insert_one({'barcode': barcode})
+            collection.insert_one(barcode_data)
             flash('Código de barras adicionado com sucesso!', 'success')
         return redirect(url_for('home'))
     
@@ -83,8 +88,6 @@ def logout():
     session.pop('google_token', None)
     session.pop('user_info', None)
     return redirect(url_for('home'))
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
