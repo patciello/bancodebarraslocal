@@ -8,8 +8,8 @@ app = Flask(__name__)
 
 # Load environment variables
 load_dotenv()
-app.config['MONGO_URI'] = os.environ.get('MONGO_URI')
-app.secret_key = os.environ.get('SECRET_KEY', 'CLIENT_SECRET')
+app.config['MONGO_URI'] = os.environ.get('MONGO_URI', 'mongodb://localhost:27017/')
+app.secret_key = os.environ.get('SECRET_KEY', 'sua_chave_secreta_aqui')
 
 # Initialize MongoDB client
 client = MongoClient(app.config['MONGO_URI'])
@@ -29,10 +29,10 @@ def home():
             barcode_data = {'barcode': barcode, 'timestamp': timestamp}
         
         if collection.find_one({'barcode': barcode}):
-            flash('Código de barras já foi adicionado!', 'warning')
+            flash('Código de barras já foi adicionado!')
         else:
             collection.insert_one(barcode_data)
-            flash('Código de barras adicionado com sucesso!', 'success')
+            flash('Código de barras adicionado com sucesso!')
         return redirect(url_for('home'))
     
     # Recupera os últimos 10 códigos de barras
