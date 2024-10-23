@@ -23,14 +23,12 @@ collection = db['barcodes']
 oauth = OAuth(app)
 oauth.register(
     name='google',
-    client_id=os.environ.get('GOOGLE_CLIENT_ID'),
-    client_secret=os.environ.get('GOOGLE_CLIENT_SECRET'),
-    access_token_url=os.environ.get('GOOGLE_TOKEN_URI'),
-    authorize_url=os.environ.get('GOOGLE_AUTH_URI'),
-    authorize_redirect_uri=os.environ.get('GOOGLE_REDIRECT_URI'),
-    api_base_url='https://www.googleapis.com/oauth2/v1/',
-    client_kwargs={'scope': 'openid profile email'}
+    client_id=os.environ.get('CLIENT_ID'),
+    client_secret=os.environ.get('CLIENT_SECRET'),
+    server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
+    client_kwargs={'scope': 'openid profile email'},
 )
+    
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -76,11 +74,16 @@ def login():
 # Rota de autenticação
 @app.route('/auth')
 def auth():
-    token = oauth.google.authorize_access_token()
-    session['google_token'] = token
-    user = oauth.google.get('userinfo').json()
-    session['user_info'] = user
-    return redirect(url_for('home'))
+        token = oauth.google.authorize_access_token()
+        if token:
+            session['google_token'] = token
+            user = oauth.google.parse_id_token(token)
+            session['user_info'] = user
+            print(f"Autenticação bem-sucedida: {user}")
+            return redirect(url_for('home'))
+        else:
+            print("Falha ao obter o token do Google.")
+            return redirect(url_for('login'))
 
 # Rota de logout
 @app.route('/logout')
