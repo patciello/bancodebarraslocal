@@ -8,8 +8,8 @@ app = Flask(__name__)
 
 # Load environment variables
 load_dotenv()
-app.config['MONGO_URI'] = os.environ.get('MONGO_URI', 'mongodb://localhost:27017/')
-app.secret_key = os.environ.get('SECRET_KEY', 'sua_chave_secreta_aqui')
+app.config['MONGO_URI'] = os.environ.get('MONGO_URI')
+app.secret_key = os.environ.get('SECRET_KEY')
 
 # Initialize MongoDB client
 client = MongoClient(app.config['MONGO_URI'])
@@ -35,17 +35,23 @@ def home():
             flash('Código de barras adicionado com sucesso!')
         return redirect(url_for('home'))
     
-    # Recupera os últimos 10 códigos de barras
+    # Recupera os últimos 10 códigos de barras com tratamento de campos ausentes
     recent_barcodes = collection.find().sort('_id', -1).limit(10)
-    recent_barcodes = [{'barcode': b['barcode'], 'timestamp': b['timestamp'], 'trecho': b.get('trecho')} for b in recent_barcodes]
+    recent_barcodes = [{
+        'barcode': b.get('barcode', ''),
+        'timestamp': b.get('timestamp', ''),
+        'trecho': b.get('trecho', '')
+    } for b in recent_barcodes]
     return render_template('home.html', barcodes=recent_barcodes)
-
 # Rota para visualizar o histórico de códigos de barras
 @app.route('/history')
 def history():
     all_barcodes = collection.find().sort('_id', -1)
-    all_barcodes = [{'barcode': b['barcode'], 'timestamp': b['timestamp'], 'trecho': b.get('trecho')} for b in all_barcodes]
+    all_barcodes = [{
+        'barcode': b.get('barcode', ''),
+        'timestamp': b.get('timestamp', ''),
+        'trecho': b.get('trecho', '')
+    } for b in all_barcodes]
     return render_template('history.html', barcodes=all_barcodes)
-
 if __name__ == '__main__':
     app.run(debug=True)
