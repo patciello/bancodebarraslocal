@@ -36,3 +36,14 @@
   </table>
 </div>
 {% endblock %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var messages = document.getElementsByClassName('flash-message');
+    Array.from(messages).forEach(function(message) {
+        setTimeout(function() {
+            message.style.display = 'none';
+        }, 5000);
+    });
+});
+</script>

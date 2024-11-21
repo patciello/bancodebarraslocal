@@ -29,12 +29,11 @@ def home():
             barcode_data = {'barcode': barcode, 'timestamp': timestamp}
         
         if collection.find_one({'barcode': barcode}):
-            flash('Código de barras já foi adicionado!')
+            flash('Código de barras já foi adicionado!', 'error')
         else:
             collection.insert_one(barcode_data)
-            flash('Código de barras adicionado com sucesso!')
-        return redirect(url_for('home'))
-    
+            flash('Código de barras adicionado com sucesso!', 'success')
+        return redirect(url_for('home'))    
     # Recupera os últimos 10 códigos de barras com tratamento de campos ausentes
     recent_barcodes = collection.find().sort('_id', -1).limit(10)
     recent_barcodes = [{

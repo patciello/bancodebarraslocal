@@ -1,0 +1,24 @@
+.flash-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 1000;
+    animation: fadeIn 0.5s;
+}
+
+.success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.error {
+    background-color: #f44336;
+    color: white;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
